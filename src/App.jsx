@@ -1,35 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { useAldoAlert } from 'aldo-alert';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { showAldoAlert } = useAldoAlert();
+
+  const handleButtonClick = (message, type) => {
+    showAldoAlert(message, type);
+  };
+
+  const buttonContainerStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh', // Center vertically on the page
+  };
+
+  const buttonStyle = {
+    padding: '10px 20px',
+    margin: '0 10px', // Add margin between buttons
+    borderRadius: '5px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease',
+  };
+
+  const successButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: '#2b9254',
+    color: 'white',
+  };
+
+  const warningButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: '#f6e05e',
+    color: 'black',
+  };
+
+  const infoButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: '#4CAF50',
+    color: 'white',
+  };
+
+  const dangerButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: '#e53e3e',
+    color: 'white',
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={buttonContainerStyle}>
+      <button
+        style={successButtonStyle}
+        onClick={() => handleButtonClick('Success message!', 'success')}
+      >
+        Success
+      </button>
+      <button
+        style={warningButtonStyle}
+        onClick={() => handleButtonClick('Warning message!', 'warning')}
+      >
+        Warning
+      </button>
+      <button
+        style={infoButtonStyle}
+        onClick={() => handleButtonClick('Info message!', 'info')}
+      >
+        Info
+      </button>
+      <button
+        style={dangerButtonStyle}
+        onClick={() => handleButtonClick('Danger message!', 'danger')}
+      >
+        Danger
+      </button>
+    </div>
+  );
 }
 
-export default App
+export default App;
